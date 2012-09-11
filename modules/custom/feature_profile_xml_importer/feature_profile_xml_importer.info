@@ -1,0 +1,11 @@
+name = Feature Profile XML Importer
+description = Imports Feature Profile content via an XML feed.
+core = 7.x
+package = Faculty of Arts Repository
+version = 7.x-1.0
+project = feature_profile_xml_importer
+dependencies[] = feeds
+dependencies[] = feeds_xpathparser
+features[ctools][] = feeds:feeds_importer_default:1
+features[features_api][] = api:1
+features[feeds_importer][] = profile_xml_feeds
