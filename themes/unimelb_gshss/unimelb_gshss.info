@@ -25,4 +25,4 @@ stylesheets[all][]	= scss/slider.scss
 stylesheets[all][]	= scss/gshss.scss
 
 ; JavaScript is inherited.
-; scripts[]			=
+scripts[] = js/career_program.js
