@@ -1,0 +1,8 @@
+name = GSHSS Custom Module
+description = This module provides custom content and widgets for the Grad School web site.
+version = 7.x-1.0
+
+core = 7.x
+package = University of Melbourne
+
+dependencies[] = panels

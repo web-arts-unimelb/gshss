@@ -1,0 +1,28 @@
+<?php
+/**
+ * @file uom_gshss_custom.module
+ * Provides custom functionality for the grad school site.
+ */
+
+/**
+ * Implementation of hook_ctools_plugin_directory().
+ */
+function uom_gshss_custom_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'ctools' && !empty($plugin)) {
+    return "plugins/$plugin";
+  }
+}
+
+/**
+ * Implement hook_ctools_plugin_api().
+ * If you do this, Ctools will pick up default panels pages in
+ * <modulename>.pages_default.inc
+ */
+function uom_gshss_custom_ctools_plugin_api($module, $api) {
+  if ($module == 'panels_mini' && $api == 'panels_default') {
+    return array('version' => 1);
+  }
+  if ($module == 'page_manager' && $api == 'pages_default') {
+    return array('version' => 1);
+  }
+}
