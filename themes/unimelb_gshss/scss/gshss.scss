@@ -28,19 +28,49 @@ $button-text: white;
 
 /* Feature menu. */
 #feature-menu {
+  margin-left: 0px;
+  padding-left: 0px;	
+
+  ul {
+	margin-left: 0px;
+	padding-left: 0px;
+  }  
+
   ul > li {
     float: left;
-
+	
     a {
       @include button($button-menu-background, $button-text);
     }
     &.first {
       a {
         @include button($button-first-background, $button-text);
+		margin-left: -7px;
       }
     }
   }
 }
+
+div#site-search
+{
+	float:right;
+	margin-top: 14px;
+
+	input#search-input
+	{
+		float:right;
+		width: 40%;
+		padding: .3em 1em .3em;
+	}
+
+	a#search-button
+	{
+		@include button($button-menu-background, $button-text);
+		float:right;
+		margin-left: 10px;
+	}
+}
+
 
 #background-wrapper, body.html.home.front {
   background: url('../images/back-gradient.png') #036;
@@ -59,7 +89,7 @@ $button-text: white;
 }
 
 /* Blocks. */
-div.col-2 {
+div.the_nav {
   margin-left: 0px;
   margin-right: 20px;
 

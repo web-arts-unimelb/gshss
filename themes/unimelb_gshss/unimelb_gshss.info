@@ -8,7 +8,8 @@ base theme = unimelb
 
 ; Regions are not inherited from the base theme.
 regions[help]			= Help
-regions[feature_menu]	= Feature Menu
+regions[feature_menu]		= Feature Menu
+regions[site_search]		= Site search	
 regions[slider]			= Slider
 regions[content]		= Content
 regions[navigation]		= Navigation
@@ -20,9 +21,13 @@ regions[content_bottom]	= Content Bottom
 regions[home_event]	= home_event
 regions[home_promo]	= home_promo
 
+; Panels layouts. You can place multiple layouts under the "layouts" folder.
+plugins[panels][layouts] = layouts
+
 ; Stylesheets are inherited.
 stylesheets[all][]	= scss/slider.scss
 stylesheets[all][]	= scss/gshss.scss
 
 ; JavaScript is inherited.
 scripts[] = js/career_program.js
+scripts[] = js/search.js

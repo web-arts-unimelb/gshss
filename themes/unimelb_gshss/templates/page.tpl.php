@@ -103,127 +103,135 @@
 
 	</div><!-- end header -->
 
-	<?php if (!empty($page['feature_menu'])): ?>
-	<div id="feature-menu">
-		<?php print render($page['feature_menu']); ?>
+	<div class="feature">
+		<?php if (!empty($page['feature_menu'])): ?>
+			<div id="feature-menu" class="col-6">
+				<?php print render($page['feature_menu']); ?>
+			</div>
+		<?php endif; ?>
+
+		<div id="site-search" class="col-2">
+				<a id="search-button" href="#">Search</a><input id="search-input"/>
+			</form>
+		</div>
 	</div>
-	<?php endif; ?>
 
 	<div id="content-wrap">
+		<?php if (!empty($page['slider'])): ?>
+			<div class="col-8" role="complementary" id="slider">
+				<?php print render($page['slider']); ?>
+			</div>
+		<?php endif; ?>
 
-	<?php if (!empty($page['slider'])): ?>
-		<div class="col-8" role="complementary" id="slider">
-			<?php print render($page['slider']); ?>
-		</div>
-	<?php endif; ?>
+		<?php if( !empty( $page['highlight'] ) ): ?>
+			<div class="col-2">
+				<div class="events">
+					<?php print render($page['highlight']); ?>
+				</div>		
+			</div>	
 
-	<?php if( !empty( $page['highlight'] ) ): ?>
-		<div class="col-2">
-			<div class="events">
-				<?php print render($page['highlight']); ?>
-			</div>		
-		</div>	
-
-		<div class="main col-4" role="main" id="main-content">
-			<?php print $messages; ?>
-			<?php if ($tabs = render($tabs)): ?>
-				<div class="tabs"><?php print $tabs; ?></div>
-			<?php endif; ?>
-			<?php print render($page['help']); ?>
-			<?php if ($action_links): ?>
-				<ul class="action-links"><?php print render($action_links); ?></ul>
-			<?php endif; ?>
-			<?php if ($title): ?>
-				<?php print render($title_prefix); ?>
-				<?php print '<h2 ' . $title_attributes . '>' . $title . '</h2>'; ?>
-				<?php print render($title_suffix); ?>
-			<?php endif; ?>
-			<?php print render($page['content']); ?>
-			<?php if ($page['content_bottom']): ?>
-				<div id="main-content-bottom">
-					<?php print render($page['content_bottom']); ?>
-				</div>
-			<?php endif; ?>
-		</div>
-
-		<div class="col-2">
-			<div class="the_nav first" role="navigation">
-				<?php if($page["navigation"]): ?>
-					<?php print render($page["navigation"]); ?>
+			<div class="main col-4" role="main" id="main-content">
+				<?php print $messages; ?>
+				<?php if ($tabs = render($tabs)): ?>
+					<div class="tabs"><?php print $tabs; ?></div>
+				<?php endif; ?>
+				<?php print render($page['help']); ?>
+				<?php if ($action_links): ?>
+					<ul class="action-links"><?php print render($action_links); ?></ul>
+				<?php endif; ?>
+				<?php if ($title): ?>
+					<?php print render($title_prefix); ?>
+					<?php print '<h2 ' . $title_attributes . '>' . $title . '</h2>'; ?>
+					<?php print render($title_suffix); ?>
+				<?php endif; ?>
+				<?php print render($page['content']); ?>
+				<?php if ($page['content_bottom']): ?>
+					<div id="main-content-bottom">
+						<?php print render($page['content_bottom']); ?>
+					</div>
 				<?php endif; ?>
 			</div>
 
-			<?php if($page["sidebar_right"]): ?>
-				<div class="sidebar-right">
-					<?php print render($page["sidebar_right"]); ?>
+			<div class="col-2">
+				<div class="the_nav first" role="navigation">
+					<?php if($page["navigation"]): ?>
+						<?php print render($page["navigation"]); ?>
+					<?php endif; ?>
 				</div>
-			<?php endif; ?>
-		</div>
-	<?php else: ?>
-		<div class="main col-6" role="main" id="main-content">
-			<?php print $messages; ?>
-			<?php if ($tabs = render($tabs)): ?>
-				<div class="tabs"><?php print $tabs; ?></div>
-			<?php endif; ?>
-			<?php print render($page['help']); ?>
-			<?php if ($action_links): ?>
-				<ul class="action-links"><?php print render($action_links); ?></ul>
-			<?php endif; ?>
-			<?php if ($title): ?>
-				<?php print render($title_prefix); ?>
-				<?php print '<h2 ' . $title_attributes . '>' . $title . '</h2>'; ?>
-				<?php print render($title_suffix); ?>
-			<?php endif; ?>
-			<?php print render($page['content']); ?>
-			<?php if ($page['content_bottom']): ?>
-				<div id="main-content-bottom">
-					<?php print render($page['content_bottom']); ?>
-				</div>
-			<?php endif; ?>
-		</div>
 
-		<div class="col-2">
-			<div class="the_nav first" role="navigation">
-				<?php if($page["navigation"]): ?>
-					<?php print render($page["navigation"]); ?>
+				<?php if($page["sidebar_right"]): ?>
+					<div class="sidebar-right">
+						<?php print render($page["sidebar_right"]); ?>
+					</div>
 				<?php endif; ?>
 			</div>
 
-			<?php if($page["sidebar_right"]): ?>
-				<div class="sidebar-right">
-					<?php print render($page["sidebar_right"]); ?>
+		<?php else: ?>
+
+			<div class="main col-6" role="main" id="main-content">
+				<?php print $messages; ?>
+				<?php if ($tabs = render($tabs)): ?>
+					<div class="tabs"><?php print $tabs; ?></div>
+				<?php endif; ?>
+				<?php print render($page['help']); ?>
+				<?php if ($action_links): ?>
+					<ul class="action-links"><?php print render($action_links); ?></ul>
+				<?php endif; ?>
+				<?php if ($title): ?>
+					<?php print render($title_prefix); ?>
+					<?php print '<h2 ' . $title_attributes . '>' . $title . '</h2>'; ?>
+					<?php print render($title_suffix); ?>
+				<?php endif; ?>
+				<?php print render($page['content']); ?>
+				<?php if ($page['content_bottom']): ?>
+					<div id="main-content-bottom">
+						<?php print render($page['content_bottom']); ?>
+					</div>
+				<?php endif; ?>
+			</div>
+
+			<div class="col-2">
+				<div class="the_nav first" role="navigation">
+					<?php if($page["navigation"]): ?>
+						<?php print render($page["navigation"]); ?>
+					<?php endif; ?>
 				</div>
-			<?php endif; ?>
-		</div>
-	<?php endif; ?>
 
-	</div><!-- end content-wrap -->
+				<?php if($page["sidebar_right"]): ?>
+					<div class="sidebar-right">
+						<?php print render($page["sidebar_right"]); ?>
+					</div>
+				<?php endif; ?>
+			</div>
+		<?php endif; ?>
 
-</div><!-- end wrapper -->
+		</div><!-- end content-wrap -->
+	</div><!-- end wrapper -->
 
+	<hr>
+	<div class="footer">
+		<div id="local" class="wrapper">
+			<p class="footertitle"><?php print _unimelb_space_tags($site_name); ?></p>
 
+			<?php if(variable_get('unimelb_settings_ad-line1') || variable_get('unimelb_settings_ad-line2')) { ?><div id="org-details" class="col-2"><?php if(variable_get('unimelb_settings_parent-org')) { ?><p><strong><?php print variable_get('unimelb_settings_parent-org'); ?></strong></p><?php } ?><p class="location"><?php if(variable_get('unimelb_settings_ad-line1')) { ?><?php print variable_get('unimelb_settings_ad-line1'); ?><br><?php } ?><?php if(variable_get('unimelb_settings_ad-line2')) { ?><?php print variable_get('unimelb_settings_ad-line2'); ?><br><?php } ?><?php print variable_get('unimelb_settings_ad-sub'); ?>&nbsp;<?php print variable_get('unimelb_settings_ad-postcode'); ?>&nbsp;<?php print variable_get('unimelb_settings_ad-state'); ?>&nbsp;<?php print variable_get('unimelb_settings_ad-country'); ?></p></div><?php } ?>
 
-<hr><div class="footer"><div id="local" class="wrapper"><p class="footertitle"><?php print _unimelb_space_tags($site_name); ?></p>
-
-<?php if(variable_get('unimelb_settings_ad-line1') || variable_get('unimelb_settings_ad-line2')) { ?><div id="org-details" class="col-2"><?php if(variable_get('unimelb_settings_parent-org')) { ?><p><strong><?php print variable_get('unimelb_settings_parent-org'); ?></strong></p><?php } ?><p class="location"><?php if(variable_get('unimelb_settings_ad-line1')) { ?><?php print variable_get('unimelb_settings_ad-line1'); ?><br><?php } ?><?php if(variable_get('unimelb_settings_ad-line2')) { ?><?php print variable_get('unimelb_settings_ad-line2'); ?><br><?php } ?><?php print variable_get('unimelb_settings_ad-sub'); ?>&nbsp;<?php print variable_get('unimelb_settings_ad-postcode'); ?>&nbsp;<?php print variable_get('unimelb_settings_ad-state'); ?>&nbsp;<?php print variable_get('unimelb_settings_ad-country'); ?></p></div><?php } ?>
-
-<?php if (variable_get('unimelb_settings_ad-email')) { ?>
-	<ul class="col-2">
-		<li>
-			<strong>Email:</strong> <a href="mailto:<?php print variable_get('unimelb_settings_ad-email'); ?>"><?php print variable_get('unimelb_settings_ad-email'); ?></a>
-		</li>
-
-		<?php if (variable_get('unimelb_settings_ad-phone')) { ?>
+	<?php if (variable_get('unimelb_settings_ad-email')) { ?>
+		<ul class="col-2">
 			<li>
-				<strong>Phone:</strong> <?php print variable_get('unimelb_settings_ad-phone'); ?>
+				<strong>Email:</strong> <a href="mailto:<?php print variable_get('unimelb_settings_ad-email'); ?>"><?php print variable_get('unimelb_settings_ad-email'); ?></a>
 			</li>
-		<?php } ?>
 
-		<?php if (variable_get('unimelb_settings_ad-fax')) { ?>
-			<li>
-				<strong>Fax:</strong> <?php print variable_get('unimelb_settings_ad-fax'); ?>
-			</li>
-		<?php } ?>
+			<?php if (variable_get('unimelb_settings_ad-phone')) { ?>
+				<li>
+					<strong>Phone:</strong> <?php print variable_get('unimelb_settings_ad-phone'); ?>
+				</li>
+			<?php } ?>
+
+			<?php if (variable_get('unimelb_settings_ad-fax')) { ?>
+				<li>
+					<strong>Fax:</strong> <?php print variable_get('unimelb_settings_ad-fax'); ?>
+				</li>
+			<?php } ?>
 
 			<?php if (variable_get('unimelb_settings_fb-url') || variable_get('unimelb_settings_tw-url')) { ?><li class="social"><a class="facebook" href="<?php print variable_get('unimelb_settings_fb-url'); ?>">Facebook</a>&nbsp;<a class="twitter" href="<?php print variable_get('unimelb_settings_tw-url'); ?>">Twitter</a></li><?php } ?></ul><?php } ?>
 
