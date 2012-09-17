@@ -4,11 +4,15 @@
  * Provides custom functionality for the grad school site.
  */
 
-function uom_gshss_custom_form_alter(&$form, $form_state, $form_id) {
-	dpm($form_id);
-	if ($form_id == 'taxonomy_overview_terms') {
-		dpm($form);
-	}
+/**
+ * Implementation of hook_theme().
+ */
+function uom_gshss_custom_theme($existing, $type, $theme, $path) {
+  return array(
+    'uom_gshss_custom_program_fees_and_assistance_edit_form' => array(
+      'render element' => 'form',
+    ),
+  );
 }
 
 /**
@@ -32,4 +36,31 @@ function uom_gshss_custom_ctools_plugin_api($module, $api) {
   if ($module == 'page_manager' && $api == 'pages_default') {
     return array('version' => 1);
   }
+}
+
+function theme_uom_gshss_custom_program_fees_and_assistance_edit_form($variables) {
+  $form = $variables['form'];
+
+  foreach (element_children($form) as $key) {
+    if (isset($form[$key]['name'])) {
+      $field = &$form[$key];
+      $row = array();
+      $row[] = drupal_render($field['field']);
+      $row[] = drupal_render($field['name']);
+      $row[] = drupal_render($field['widget']);
+      if (isset($field['weight'])) {
+        $field['weight']['#attributes']['class'] = array('field-weight');
+        $row[] = drupal_render($field['weight']);
+      }
+      $rows[] = array(
+        'data' => $row,
+        'class' => array('draggable'),
+      );
+    }
+  }
+
+  $header = array(t('Select'), t('Field'), t('Widget'), t('Weight'));
+  drupal_add_tabledrag('fees-and-assistance', 'order', 'sibling', 'field-weight');
+
+  return theme('table', array('header' => $header, 'rows' => $rows, 'empty' => t('No fields available.'), 'attributes' => array('id' => 'fees-and-assistance'))) . drupal_render_children($form);
 }

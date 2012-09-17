@@ -61,27 +61,48 @@ function uom_gshss_custom_program_fees_and_assistance_render($subtype, $conf, $p
 }
 
 function uom_gshss_custom_program_fees_and_assistance_edit_form($form, &$form_state) {
-  $options = array();
 
   $fields = field_info_instances('node', 'program');
+
+  $form['#tree'] = TRUE;
+
   foreach ($fields as $name => $field) {
+    $form[$name]['#field'] = $field;
     $form[$name]['field'] = array(
       '#type' => 'checkbox',
-      '#title' => $field['label']
+      '#title' => t('Checkbox for @name', array('@name' => $field['label'])),
+      '#title_display' => 'invisible',
     );
-
+    $form[$name]['name'] = array(
+      '#markup' => check_plain($field['label']),
+    );
+    $form[$name]['widget'] = array(
+      '#markup' => check_plain($field['widget']['type']),
+    );
     $form[$name]['weight'] = array(
       '#type' => 'weight',
-      '#title' => $field['label']
+      '#title' => t('Weight for @name', array('@name' => $field['label'])),
+      '#title_display' => 'invisible',
+      '#default_value' => $field['widget']['weight'],
     );
-
   }
 
-  drupal_add_tabledrag('program-fees-and-assistance', 'order', 'sibling', 'order-field');
-
+  // Only make this form include a submit button and weight if more than one
+  // field exists.
+  if (count($fields) > 1) {
+    $form['actions'] = array('#type' => 'actions');
+    $form['actions']['submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Save'),
+    );
+  }
+  elseif (isset($field)) {
+    unset($form[$name]['weight']);
+  }
   return $form;
 }
 
 function uom_gshss_custom_program_fees_and_assistance_edit_form_submit($form, &$form_state) {
+  dpm($form_state);
   $form_state['conf']['fields'] = array_filter($form_state['values']['fields']);
 }
