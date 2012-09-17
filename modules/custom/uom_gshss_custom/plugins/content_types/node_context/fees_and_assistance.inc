@@ -65,19 +65,25 @@ function uom_gshss_custom_program_fees_and_assistance_edit_form($form, &$form_st
 
   $fields = field_info_instances('node', 'program');
   foreach ($fields as $name => $field) {
-    $form[$name]['field'] = array(
-      '#type' => 'checkbox',
-      '#title' => $field['label']
+    $options[$name] = array(
+      'field' => $name,
+      'label' => check_plain($field['label']),
+      'widget' => $field['widget']['type'],
     );
-
-    $form[$name]['weight'] = array(
-      '#type' => 'weight',
-      '#title' => $field['label']
-    );
-
   }
 
-  drupal_add_tabledrag('program-fees-and-assistance', 'order', 'sibling', 'order-field');
+  $header = array('field' => t('Field'), 'label' => t('Label'), 'widget' => t('Widget'));
+
+  $form['fields'] = array(
+    '#type' => 'tableselect',
+    '#header' => $header,
+    '#options' => $options,
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  );
 
   return $form;
 }

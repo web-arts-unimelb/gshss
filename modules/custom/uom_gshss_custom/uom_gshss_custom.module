@@ -4,13 +4,6 @@
  * Provides custom functionality for the grad school site.
  */
 
-function uom_gshss_custom_form_alter(&$form, $form_state, $form_id) {
-	dpm($form_id);
-	if ($form_id == 'taxonomy_overview_terms') {
-		dpm($form);
-	}
-}
-
 /**
  * Implementation of hook_ctools_plugin_directory().
  */
