@@ -111,8 +111,7 @@
 		<?php endif; ?>
 
 		<div id="site-search" class="col-2">
-				<a id="search-button" href="#">Search</a><input id="search-input"/>
-			</form>
+			<a id="search-button" href="#">Search</a><input id="search-input"/>
 		</div>
 	</div>
 
