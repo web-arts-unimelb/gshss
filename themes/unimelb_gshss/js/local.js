@@ -1,9 +1,13 @@
 Drupal.behaviors.the_search = {
 	attach: function (context, settings) {
+		__define_focus();
+
 		$("#search-button", context).click(function() {
 			var search_input_value = $("#search-input").val();
 			window.location = '/search/node/' + search_input_value;
 		});
+
+		__handle_search_by_pressing_return();
 	}
 };
 
@@ -62,3 +66,35 @@ Drupal.behaviors.career_and_program = {
 	
 	}
 };
+
+// Define your functions
+
+// Add focus, so we can use
+function __define_focus()
+{
+	var filters = $.expr[":"];
+	if ( !filters.focus ) { 
+	    filters.focus = function( elem ) {
+	       return elem === document.activeElement && ( elem.type || elem.href );
+	    };
+	}
+}
+
+
+function __handle_search_by_pressing_return()
+{
+	$(document).keypress(function(e) {
+		// Return is pressed.		
+		if(e.which == 13) 
+		{
+			// Search box is focused.
+			if( $("#search-input").is(":focus") )
+			{
+				var search_input_value = $("#search-input").val();
+				window.location = '/search/node/' + search_input_value;
+			}
+		}
+	});
+}
+
+
