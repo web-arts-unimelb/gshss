@@ -5,6 +5,18 @@
  */
 
 /**
+ * Implements hook_webform_select_options_info().
+ */
+function uom_gshss_custom_webform_select_options_info() {
+  $items['uom_gshss_custom_programs'] = array(
+    'title' => t('UoM Programs'),
+    'options callback' => 'uom_gshss_custom_programs_list',
+    'file' => 'include/webform.options.inc',
+  );
+  return $items;
+}
+
+/**
  * Implementation of hook_ctools_plugin_directory().
  */
 function uom_gshss_custom_ctools_plugin_directory($module, $plugin) {
