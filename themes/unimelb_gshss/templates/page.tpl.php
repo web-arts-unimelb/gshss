@@ -107,8 +107,12 @@
 		<?php if (!empty($page['feature_menu'])): ?>
 			<div id="feature-menu" class="col-6">
 				<?php print render($page['feature_menu']); ?>
+		
+				<?php echo social_icons(); ?>
 			</div>
 		<?php endif; ?>
+
+		
 
 		<?php if(!empty($site_search_box)): ?>
 			<div id="site-search" class="col-2">
