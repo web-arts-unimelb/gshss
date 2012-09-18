@@ -5,12 +5,12 @@
  */
 
 /**
- * Helper to return a list of published program nodes as keyed array.
+ * Helper to return a list of published $type nodes as keyed array.
  */
-function uom_gshss_custom_programs_list() {
+function uom_gshss_custom_node_list($component, $flat, $filter, $type = 'webform') {
   $nodes = db_select('node', 'n')
     ->fields('n', array('nid', 'title'))
-    ->condition('type', 'program')
+    ->condition('type', $type)
     ->condition('status', 0, '<>')
     ->execute()
     ->fetchAll();

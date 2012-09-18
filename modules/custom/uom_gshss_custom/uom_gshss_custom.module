@@ -10,10 +10,48 @@
 function uom_gshss_custom_webform_select_options_info() {
   $items['uom_gshss_custom_programs'] = array(
     'title' => t('UoM Programs'),
-    'options callback' => 'uom_gshss_custom_programs_list',
+    'options callback' => 'uom_gshss_custom_node_list',
+    'options arguments' => 'program',
+    'file' => 'include/webform.options.inc',
+  );
+  $items['uom_gshss_custom_awards'] = array(
+    'title' => t('UoM Awards'),
+    'options callback' => 'uom_gshss_custom_node_list',
+    'options arguments' => 'award',
     'file' => 'include/webform.options.inc',
   );
   return $items;
+}
+
+/**
+ * Implements hook_node_view().
+ *
+ * This is a sample of how we pull the contact email into the award webform
+ *
+ * @todo
+ *   Fix the hardcoded node id dependency.
+ * @todo
+ *   Look up the contacts real name and add to the form
+ */
+function uom_gshss_custom_node_view($node, $view_mode, $langcode) {
+  // No, don't hardcode the nid.
+  if ($node->nid == 365) {
+    $pid = isset($_GET['pid']) ? intval($_GET['pid']) : 0;
+    $mail = db_select('field_revision_field_award_enquire_now', 'e')
+      ->fields('e', array('field_award_enquire_now_email'))
+      ->condition('entity_id', $pid)
+      ->execute()
+      ->fetchField();
+
+    if (!valid_email_address($mail)) {
+      global $theme_key;
+      $mail = theme_get_setting('unimelb_settings_ad-email');
+    }
+
+    // Look up real name (use LDAP).
+
+    drupal_add_js("jQuery(document).ready(function () { $('#edit-submitted-contact').val('{$mail}'); });", 'inline');
+  }
 }
 
 /**
