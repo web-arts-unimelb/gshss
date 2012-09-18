@@ -17,35 +17,43 @@ function unimelb_gshss_preprocess_html(&$variables) {
 
 function social_icons()
 {
-	$twitter_html = __get_social_icon_html("twitter");
-	$wordpress_html = __get_social_icon_html("wordpress");
+	$html = "";
 
-	$html = "
-		<div>
-			$twitter_html
-			$wordpress_html
-		</div>
-	";
-	
+	$social_list = array(
+		"twitter",
+		"wordpress",
+		"facebook"
+	);
+
+	$html .= "<div id=\"social-icons\">";
+	foreach($social_list as $social_name)
+	{
+		$html .= __get_social_icon_html($social_name);
+	}
+	$html .= "</div>";
+
 	return $html;
 }
 
 
 function __get_social_icon_html($social_name = null)
 {
+	global $base_url;
 	$html = "";
 
 	if(!__is_social_icon_url_existed($social_name, $social_media_url))
 	{
-		return;
+		return "";
 	}
 
 	$theme_path = path_to_theme();
 	$image_uri = "$theme_path/images/$social_name-logo.png";	
+	$image_full_url = $base_url. "/". $image_uri;
 	$image_file_path = $_SERVER['DOCUMENT_ROOT']. "/". $image_uri;
+
 	if(!is_file($image_file_path))
 	{
-		return;
+		return "";
 	}
 	
 	$adjust = __get_social_icon_adjust();
@@ -59,7 +67,7 @@ function __get_social_icon_html($social_name = null)
 
 	$html = "
 		<a href=\"$social_media_url\">
-			<img src=\"$image_uri\" $image_style />
+			<img src=\"$image_full_url\" $image_style />
 		</a>
 	";
 
