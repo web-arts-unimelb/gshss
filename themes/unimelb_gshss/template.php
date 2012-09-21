@@ -129,6 +129,9 @@ function __get_social_icon_adjust()
 	$info = array();
 	$info["padding-top"] = "3px";
 
+	if(!module_exists('browscap')) {
+		return $info;
+	}
 	$browser_info = browscap_get_browser();
 	$user_agent = $browser_info["browser"]; 
 	if($user_agent == "Chromium")
