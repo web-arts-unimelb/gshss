@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Award XML Importer feature.
- */
-
-include_once 'award_xml_importer.features.inc';
