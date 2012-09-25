@@ -66,6 +66,8 @@ function uom_gshss_custom_program_fees_and_assistance_render($subtype, $conf, $p
 }
 
 function uom_gshss_custom_program_fees_and_assistance_edit_form($form, &$form_state) {
+  $conf = $form_state['conf'];
+
   $options = array();
 
   $fields = field_info_instances('node', 'program');
@@ -83,6 +85,7 @@ function uom_gshss_custom_program_fees_and_assistance_edit_form($form, &$form_st
     '#type' => 'tableselect',
     '#header' => $header,
     '#options' => $options,
+    '#default_value' => $conf['fields'],
   );
 
   $form['submit'] = array(
