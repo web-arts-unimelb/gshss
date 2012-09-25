@@ -88,11 +88,6 @@ function uom_gshss_custom_program_fees_and_assistance_edit_form($form, &$form_st
     '#default_value' => $conf['fields'],
   );
 
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Submit'),
-  );
-
   return $form;
 }
 
