@@ -50,7 +50,12 @@ function uom_gshss_custom_program_fees_and_assistance_render($subtype, $conf, $p
   if (!empty($node->nid)) {
     if ($node->type == 'program') {
       $content = node_view($node, 'full');
-      foreach ($conf['fields'] as $field) {
+      
+	  foreach ($conf['fields'] as $field) {
+		if(!isset($content[$field]) || count($content[$field]) == 0) {
+			// Even the field is selected, but it is empty or unset, so skip it.
+			continue;
+		}
         $rows[] = array('title' => $content[$field]['#title'], 'value' => $content[$field][0]['#markup']);
       }
       $block->content = theme('table', array('header' => NULL, 'rows' => $rows));
