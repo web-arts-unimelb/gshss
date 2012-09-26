@@ -107,12 +107,9 @@
 		<?php if (!empty($page['feature_menu'])): ?>
 			<div id="feature-menu" class="col-6">
 				<?php print render($page['feature_menu']); ?>
-		
 				<?php echo social_icons(); ?>
 			</div>
 		<?php endif; ?>
-
-		
 
 		<?php if(!empty($site_search_box)): ?>
 			<div id="site-search" class="col-2">
@@ -182,11 +179,13 @@
 				<?php if ($action_links): ?>
 					<ul class="action-links"><?php print render($action_links); ?></ul>
 				<?php endif; ?>
+
 				<?php if ($title): ?>
 					<?php print render($title_prefix); ?>
 					<?php print '<h2 ' . $title_attributes . '>' . $title . '</h2>'; ?>
 					<?php print render($title_suffix); ?>
 				<?php endif; ?>
+
 				<?php print render($page['content']); ?>
 				<?php if ($page['content_bottom']): ?>
 					<div id="main-content-bottom">
@@ -220,29 +219,76 @@
 
 			<?php if(variable_get('unimelb_settings_ad-line1') || variable_get('unimelb_settings_ad-line2')) { ?><div id="org-details" class="col-2"><?php if(variable_get('unimelb_settings_parent-org')) { ?><p><strong><?php print variable_get('unimelb_settings_parent-org'); ?></strong></p><?php } ?><p class="location"><?php if(variable_get('unimelb_settings_ad-line1')) { ?><?php print variable_get('unimelb_settings_ad-line1'); ?><br><?php } ?><?php if(variable_get('unimelb_settings_ad-line2')) { ?><?php print variable_get('unimelb_settings_ad-line2'); ?><br><?php } ?><?php print variable_get('unimelb_settings_ad-sub'); ?>&nbsp;<?php print variable_get('unimelb_settings_ad-postcode'); ?>&nbsp;<?php print variable_get('unimelb_settings_ad-state'); ?>&nbsp;<?php print variable_get('unimelb_settings_ad-country'); ?></p></div><?php } ?>
 
-	<?php if (variable_get('unimelb_settings_ad-email')) { ?>
+
+		<?php if(!empty($unimelb_meta_email)): ?>
+			<ul class="col-2">
+				<li>
+					<strong>Email: </strong> 
+					<a href="mailto:<?php print $unimelb_meta_email; ?>">
+						<?php print $unimelb_meta_email; ?>
+					</a>
+				</li>
+
+				<?php if(!empty($unimelb_meta_phone)): ?>
+					<li>
+						<strong>Phone:</strong> <?php print $unimelb_meta_phone; ?>
+					</li>
+				<?php endif; ?>
+
+
+				<?php if(!empty($unimelb_meta_fax)): ?>
+					<li>
+						<strong>Fax:</strong> <?php print $unimelb_meta_fax; ?>
+					</li>
+				<?php endif; ?>
+
+
+				<?php if(!empty($unimelb_meta_facebook) || !empty($unimelb_meta_twitter)): ?>
+					<li class="social">
+						<?php if(!empty($unimelb_meta_facebook)): ?>				
+							<a class="facebook" href="<?php print $unimelb_meta_facebook; ?>">Facebook</a>
+							&nbsp;
+						<?php endif; ?>
+						<?php if(!empty($unimelb_meta_twitter)): ?>			
+							<a class="twitter" href="<?php print $unimelb_meta_twitter; ?>">Twitter</a>
+						<?php endif; ?>
+					</li>
+				<?php endif; ?>
+			</ul>
+
+		<?php endif; ?>
+
+		<?php if(!empty($unimelb_meta_auth_name) || !empty($unimelb_meta_maint_name)): ?>
+			<ul class="col-2">
+				<?php if(!empty($unimelb_meta_auth_name)): ?>	
+					<li>
+						<strong>Authoriser:</strong><br />
+						<?php print $unimelb_meta_auth_name; ?>
+					</li>
+				<?php endif; ?>
+
+				<?php if(!empty($unimelb_meta_maint_name)): ?>	
+					<li>
+						<strong>Maintainer:</strong><br />
+						<?php print $unimelb_meta_maint_name; ?>
+					</li>
+				<?php endif; ?>
+			</ul>
+		<?php endif; ?>
+
 		<ul class="col-2">
+			<?php if(!empty($unimelb_meta_date_created)): ?>
+				<li>
+					<strong>Date created:</strong><br />
+					<?php print $unimelb_meta_date_created; ?>
+				</li>
+			<?php endif; ?>
 			<li>
-				<strong>Email:</strong> <a href="mailto:<?php print variable_get('unimelb_settings_ad-email'); ?>"><?php print variable_get('unimelb_settings_ad-email'); ?></a>
+				<strong>Last modified:</strong><br />
+				<?php print date('j F Y'); ?>
 			</li>
-
-			<?php if (variable_get('unimelb_settings_ad-phone')) { ?>
-				<li>
-					<strong>Phone:</strong> <?php print variable_get('unimelb_settings_ad-phone'); ?>
-				</li>
-			<?php } ?>
-
-			<?php if (variable_get('unimelb_settings_ad-fax')) { ?>
-				<li>
-					<strong>Fax:</strong> <?php print variable_get('unimelb_settings_ad-fax'); ?>
-				</li>
-			<?php } ?>
-
-			<?php if (variable_get('unimelb_settings_fb-url') || variable_get('unimelb_settings_tw-url')) { ?><li class="social"><a class="facebook" href="<?php print variable_get('unimelb_settings_fb-url'); ?>">Facebook</a>&nbsp;<a class="twitter" href="<?php print variable_get('unimelb_settings_tw-url'); ?>">Twitter</a></li><?php } ?></ul><?php } ?>
-
-<?php if (variable_get('unimelb_settings_auth-name') || variable_get('unimelb_settings_maint-name')) { ?><ul class="col-2"><?php if (variable_get('unimelb_settings_auth-name')) { ?><li><strong>Authoriser:</strong><br><?php print variable_get('unimelb_settings_auth-name'); ?></li><?php } ?><?php if (variable_get('unimelb_settings_maint-name')) { ?><li><strong>Maintainer:</strong><br><?php print variable_get('unimelb_settings_maint-name'); ?></li><?php } ?></ul><?php } ?>
-
-<ul class="col-2"><?php if (variable_get('unimelb_settings_date-created')) { ?><li><strong>Date created:</strong><br><?php print variable_get('unimelb_settings_date-created'); ?></li><?php } ?><li><strong>Last modified:</strong><br><?php print date('j F Y'); ?></li></ul>
-
-<hr /></div></div><!-- end footer -->
+		</ul>
+		<hr />
+	</div>
+</div><!-- end footer -->
 
