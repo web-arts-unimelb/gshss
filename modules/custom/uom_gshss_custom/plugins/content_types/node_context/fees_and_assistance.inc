@@ -49,14 +49,15 @@ function uom_gshss_custom_program_fees_and_assistance_render($subtype, $conf, $p
 
   if (!empty($node->nid)) {
     if ($node->type == 'program') {
-      $content = node_view($node, 'full');
-      
-	  foreach ($conf['fields'] as $field) {
-		if(!isset($content[$field]) || count($content[$field]) == 0) {
-			// Even the field is selected, but it is empty or unset, so skip it.
-			continue;
-		}
-        $rows[] = array('title' => $content[$field]['#title'], 'value' => $content[$field][0]['#markup']);
+      foreach ($conf['fields'] as $field_name) {
+        $field = field_view_field('node', $node, $field_name, array());
+        if (empty($field['#items'])) {
+          // Skip field if empty.
+          continue;
+        }
+        $items = field_get_items('node', $node, $field_name);
+        $value = drupal_render(field_view_value('node', $node, $field_name, $items[0]));
+        $rows[] = array('title' => check_plain($field['#title']), 'value' => $value);
       }
       $block->content = theme('table', array('header' => NULL, 'rows' => $rows));
     }
@@ -94,3 +95,4 @@ function uom_gshss_custom_program_fees_and_assistance_edit_form($form, &$form_st
 function uom_gshss_custom_program_fees_and_assistance_edit_form_submit($form, &$form_state) {
   $form_state['conf']['fields'] = array_filter($form_state['values']['fields']);
 }
+
