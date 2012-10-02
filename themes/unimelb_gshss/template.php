@@ -21,6 +21,8 @@ function unimelb_gshss_preprocess_page(&$variables) {
   if (empty($variables['title'])) {
     $variables['title'] = drupal_get_title();
   }
+
+  _set_unimelb_meta_info($variables);
 }
 
 /**
