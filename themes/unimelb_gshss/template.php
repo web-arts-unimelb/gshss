@@ -15,17 +15,6 @@ function unimelb_gshss_preprocess_html(&$variables) {
 }
 
 /**
- * Implements hook_preprocess_page().
- */
-function unimelb_gshss_preprocess_page(&$variables) {
-  if (empty($variables['title'])) {
-    $variables['title'] = drupal_get_title();
-  }
-
-  _set_unimelb_meta_info($variables);
-}
-
-/**
  * Implements hook_process_page().
  */
 function unimelb_gshss_process_page(&$variables) {
