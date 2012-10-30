@@ -72,9 +72,13 @@ div#site-search
 }
 
 
-#background-wrapper, body.html.home.front {
-  background: url('../images/back-gradient.png') #036;
-  background-repeat: repeat-x;
+body.html.home,
+body.html.blue {
+  &.front,
+  &.not-front {
+    background: url('../images/back-gradient.png') #036;
+    background-repeat: repeat-x;
+  }
 }
 
 #content-wrap {
